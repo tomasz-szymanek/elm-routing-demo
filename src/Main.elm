@@ -1,3 +1,5 @@
+module Main exposing (..)
+
 import Html exposing (Html, div, text, ul, li, a)
 import Html.Attributes exposing (class, href)
 import Html.App
@@ -22,13 +24,15 @@ initialModel route =
     }
 
 
-init : Result String Routing.Route  -> ( AppModel, Cmd Msg )
+init : Result String Routing.Route -> ( AppModel, Cmd Msg )
 init result =
     let
-      currentRoute =
-        Routing.routeFromResult result
+        currentRoute =
+            Routing.routeFromResult result
     in
-      ( initialModel currentRoute, Cmd.none )
+        ( initialModel currentRoute, Cmd.none )
+
+
 
 -- MESSAGES
 
@@ -40,43 +44,46 @@ type Msg
 
 -- VIEW
 
+
 renderMainMenu : Html Msg
 renderMainMenu =
-    div [ class "main-menu" ] [
-      ul [ class "list" ] [
-        li [] [
-          a [ href "#about" ] [
-            text "About"
-          ]
-        ],
-        li [] [
-          a [ href "#offer" ] [
-            text "Offer"
-          ]
+    div [ class "main-menu" ]
+        [ ul [ class "list" ]
+            [ li []
+                [ a [ href "#about" ]
+                    [ text "About"
+                    ]
+                ]
+            , li []
+                [ a [ href "#offer" ]
+                    [ text "Offer"
+                    ]
+                ]
+            ]
         ]
-      ]
-    ]
+
 
 view : AppModel -> Html Msg
 view model =
     case model.route of
-      Routing.OfferRoute ->
-        div [ class "viewport" ] [
-          renderMainMenu,
-          div [] [
-            Html.App.map ContentMsg (Content.view model.contentModel)
-          ]
-        ]
-      Routing.AboutRoute ->
-        div [ class "viewport" ] [
-          renderMainMenu,
-          div [] [
-            div [ class "content" ] [ text "About route" ]
-          ]
-        ]
-      Routing.NotFoundRoute ->
-        div [] [ text "Not found" ]
+        Routing.OfferRoute ->
+            div [ class "viewport" ]
+                [ renderMainMenu
+                , div []
+                    [ Html.App.map ContentMsg (Content.view model.contentModel)
+                    ]
+                ]
 
+        Routing.AboutRoute ->
+            div [ class "viewport" ]
+                [ renderMainMenu
+                , div []
+                    [ div [ class "content" ] [ text "About route" ]
+                    ]
+                ]
+
+        Routing.NotFoundRoute ->
+            div [] [ text "Not found" ]
 
 
 
@@ -106,6 +113,7 @@ subscriptions model =
 
 -- APP
 
+
 urlUpdate : Result String Routing.Route -> AppModel -> ( AppModel, Cmd Msg )
 urlUpdate result model =
     let
@@ -113,6 +121,7 @@ urlUpdate result model =
             Routing.routeFromResult result
     in
         ( { model | route = currentRoute }, Cmd.none )
+
 
 main : Program Never
 main =
