@@ -1,0 +1,41 @@
+body {
+  background-color: dimgrey;
+}
+
+.main-menu {
+  background-color: #50E3C2;
+  height: 85px;
+  width: 1200px;
+  color: red;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-menu .list {
+  margin: 0;
+  padding-top: 30px;
+  margin-right: 50px;
+}
+
+.main-menu .list li {
+  list-style: none;
+  margin-left: 30px;
+  float: right;
+  color: white;
+  border-bottom: solid 10px transparent;
+  padding-bottom: 22px;
+  transition: 0.5s ease;
+}
+
+.main-menu .list li:hover {
+  color: dimgrey;
+  border-bottom: solid 10px dimgrey;
+}
+
+.content {
+  width: 1200px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  height: calc(100vh - 85px);
+}
